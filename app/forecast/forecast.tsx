@@ -37,7 +37,7 @@ type ProjectInfo = {
 
 export default function SEOForecastPage() {
   const [forecastData, setForecastData] = useState<ForecastData[]>([])
-  const [projectInfo, setProjectInfo] = useState<ProjectInfo>({
+  const [projectInfo, _setProjectInfo] = useState<ProjectInfo>({
     companyName: 'Acme Inc.',
     website: 'https://www.acme.com',
     domainRating: 65,
