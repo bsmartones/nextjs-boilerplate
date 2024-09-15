@@ -20,6 +20,9 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
+      
+- name: Radix ui
+run: npm install @radix-ui/react-navigation-menu class-variance-authority
 
     - name: Add navigation menu component
       run: npx shadcn-ui@latest add navigation-menu
