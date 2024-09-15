@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -8,6 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronUp, Users, FileText, KeyRound, TrendingUp, Award } from "lucide-react"
 import { MegaMenu } from "@/components/MegaMenu"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
+
+export const dynamic = 'force-dynamic'
 
 export default function SEOPage() {
   return (
