@@ -37,14 +37,14 @@ type ProjectInfo = {
 
 export default function SEOForecastPage() {
   const [forecastData, setForecastData] = useState<ForecastData[]>([])
-  const [projectInfo, _setProjectInfo] = useState<ProjectInfo>({
+  const projectInfo: ProjectInfo = {
     companyName: 'Acme Inc.',
     website: 'https://www.acme.com',
     domainRating: 65,
     currentTraffic: 50000,
     language: 'English',
     projectName: 'Acme SEO Growth'
-  })
+  }
   const [globalCTR, setGlobalCTR] = useState(0.05)
   const [globalDifficulty, setGlobalDifficulty] = useState<Difficulty>('Below Website DR')
 
