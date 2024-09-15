@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { ChevronUp, Users, FileText, KeyRound, TrendingUp, Award } from "lucide-react"
 
-export default function Component() {
+export default function SEOPage() {
   return (
     <div className="container mx-auto p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -191,7 +191,7 @@ export default function Component() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Award className="w-4 h-4 text-yellow-500" />
-                  <span className="text-sm">Ranked #1 for "best personal injury lawyer"</span>
+                  <span className="text-sm">Ranked #1 for &quot;best personal injury lawyer&quot;</span>
                 </li>
               </ul>
             </CardContent>
