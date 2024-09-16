@@ -1,51 +1,51 @@
-"use client"
-
-import React, { useState, useCallback, useEffect, useRef } from 'react'
-import ReactFlow, {
-  Node,
-  Edge,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  ReactFlowProvider,
-  useReactFlow,
-} from 'reactflow'
+import { MetadataRoute } from 'next'
 import dagre from 'dagre'
-import { toPng } from 'html-to-image'
-import jsPDF from 'jspdf'
-import 'reactflow/dist/style.css'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { DownloadIcon } from 'lucide-react'
 
-interface Page {
-  id: string
-  title: string
-  parentId: string | null
-}
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = 'https://example.com' // Replace with your actual base URL
 
-const initialPages: Page[] = [
-  { id: '1', title: 'Home', parentId: null },
-  { id: '2', title: 'Products', parentId: '1' },
-  { id: '3', title: 'Shoes', parentId: '2' },
-  { id: '4', title: 'Shirts', parentId: '2' },
-  { id: '5', title: 'Nike', parentId: '3' },
-]
+  // Define your pages
+  const pages = [
+    { url: '/', lastModified: new Date() },
+    { url: '/about', lastModified: new Date() },
+    { url: '/contact', lastModified: new Date() },
+    // Add more pages as needed
+  ]
 
-const nodeWidth = 172
-const nodeHeight = 36
-
-const getLayoutedElements = (nodes: Node[], edges: Edge[], direction = 'TB') => {
+  // Create a new directed graph
   const dagreGraph = new dagre.graphlib.Graph()
-  dagreGraph.setDefaultEdgeLabel(() => ({}))
-  dagreGraph.setGraph({ rankdir: direction })
 
-  nodes.forEach((node) => {
-    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight })
+  // Set an object for the graph label
+  dagreGraph.setGraph({})
+
+  // Default to assigning a new object as a label for each new edge.
+  dagreGraph.setDefaultEdgeLabel(() => ({}))
+
+  // Add nodes to the graph
+  pages.forEach((page, index) => {
+    dagreGraph.setNode(index.toString(), { label: page.url, width: 100, height: 50 })
   })
 
+  // Define edges (connections between pages)
+  const edges = [
+    { from: '0', to: '1' }, // Home to About
+    { from: '0', to: '2' }, // Home to Contact
+    // Add more edges as needed
+  ]
+
+  // Add edges to the graph
   edges.forEach((edge) => {
-    dagreGraph.set
+    dagreGraph.setEdge(edge.from, edge.to)
+  })
+
+  // Run the layout algorithm
+  dagre.layout(dagreGraph)
+
+  // Generate sitemap entries
+  const sitemapEntries: MetadataRoute.Sitemap = pages.map((page) => ({
+    url: `${baseUrl}${page.url}`,
+    lastModified: page.lastModified,
+  }))
+
+  return sitemapEntries
+}
