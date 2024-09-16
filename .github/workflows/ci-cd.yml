@@ -27,6 +27,8 @@ run: npm install @radix-ui/react-navigation-menu class-variance-authority
 - name: Google Api's
 run: npm install googleapis
 
+run: npm install dagre googleapis
+
     - name: Add navigation menu component
       run: npx shadcn-ui@latest add navigation-menu
 
