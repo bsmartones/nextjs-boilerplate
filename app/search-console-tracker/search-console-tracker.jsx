@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,40 +7,36 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowUpDown, Search } from "lucide-react"
 
-// Mock data - in a real application, this would come from your API
-const mockData = [
-  { keyword: "nextjs tutorial", clicks: 1200, impressions: 15000, position: 2.3 },
-  { keyword: "react state management", clicks: 800, impressions: 10000, position: 3.1 },
-  { keyword: "typescript best practices", clicks: 600, impressions: 8000, position: 4.5 },
-  { keyword: "vercel deployment", clicks: 1500, impressions: 20000, position: 1.8 },
-  { keyword: "serverless functions", clicks: 950, impressions: 12000, position: 2.7 },
-]
-
-type KeywordData = {
-  keyword: string
-  clicks: number
-  impressions: number
-  position: number
-}
-
 export default function SearchConsoleTracker() {
-  const [data, setData] = useState<KeywordData[]>(mockData)
-  const [sortColumn, setSortColumn] = useState<keyof KeywordData>('clicks')
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc')
+  const [data, setData] = useState([])
+  const [sortColumn, setSortColumn] = useState('clicks')
+  const [sortDirection, setSortDirection] = useState('desc')
   const [searchTerm, setSearchTerm] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await fetch('/api/search-console-data')
+      if (!response.ok) {
+        throw new Error('Failed to fetch data')
+      }
+      const newData = await response.json()
+      setData(newData)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    // In a real application, you would fetch data from your API here
-    // For example:
-    // const fetchData = async () => {
-    //   const response = await fetch('/api/search-console-data')
-    //   const newData = await response.json()
-    //   setData(newData)
-    // }
-    // fetchData()
+    fetchData()
   }, [])
 
-  const handleSort = (column: keyof KeywordData) => {
+  const handleSort = (column) => {
     if (column === sortColumn) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     } else {
@@ -76,10 +72,13 @@ export default function SearchConsoleTracker() {
               className="pl-8"
             />
           </div>
-          <Button variant="outline" onClick={() => setData(mockData)}>
-            Refresh Data
+          <Button variant="outline" onClick={fetchData} disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Refresh Data'}
           </Button>
         </div>
+        {error && (
+          <div className="text-red-500 mb-4">Error: {error}</div>
+        )}
         <Table>
           <TableHeader>
             <TableRow>
