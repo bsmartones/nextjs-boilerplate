@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import dagre from 'dagre'
+import * as dagre from 'dagre'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://example.com' // Replace with your actual base URL
