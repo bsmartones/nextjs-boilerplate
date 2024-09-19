@@ -1,7 +1,7 @@
 "use client"; // Add this at the top
 
 import React, { useState } from 'react';
-import { Modal, Button } from '../../../components/ui';
+import { Modal, Button } from '@components/ui';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@components/ui/table';
 
 // Define a type for dataset
