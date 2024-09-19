@@ -21,8 +21,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["components/*"]  // Add this new path
+      "@/*": ["./*"],           // Existing alias for root-level paths
+      "@components/*": ["components/*"]  // Alias for components folder
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
