@@ -1,3 +1,5 @@
+"use client"; // Add this at the top
+
 import React, { useState } from 'react';
 import { Modal, Button } from '@components/ui'; // Assuming you have Modal and Button components
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@components/ui/table';
