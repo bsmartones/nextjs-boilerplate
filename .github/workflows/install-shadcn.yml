@@ -1,0 +1,16 @@
+name: Install Shadcn Components
+
+on:
+  push:
+    branches:
+      - main  # Change this to your target branch
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Shadcn components
+        run: npx shadcn@latest add "https://v0.dev/chat/b/IiuIwqDK7Mf?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..lkzNS4bDkHTcEzMX.mY9gKVTC5TE52GxL3otacJXdDqiYIBTMX-8RQef7CNCt_UV8Y_5S422Y.Jms8jpalbE_Y50S_I3QKhg"
